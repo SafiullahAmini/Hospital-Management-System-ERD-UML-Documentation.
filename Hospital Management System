@@ -1,0 +1,129 @@
+Introduction
+This document describes the Hospital Management System (HMS) and its Entity-Relationship Diagram (ERD) / UML Class Diagram.
+The system is designed to manage:
+- Patients
+- Doctors
+- Departments
+- Appointments
+- Treatments
+- Prescriptions
+- Lab Tests
+- Rooms
+- Billing
+- Insurance
+
+The diagram models real-world hospital workflows and the relationships between entities, making it easier to implement in a database or software system.
+Entities and Attributes
+Patient
+•	- PatientID (PK): Unique identifier for each patient
+•	- Name: Full name of the patient
+•	- DateOfBirth: Date of birth
+•	- Gender: Male/Female/Other
+•	- ContactNumber: Phone number
+•	- Address: Residential address
+•	- BloodGroup: Patient blood group
+•	- EmergencyContact: Contact in case of emergencies
+•	- Email: Optional email address
+•	- MaritalStatus: Single/Married/Other
+•	- NationalID: Government-issued ID number
+Doctor
+•	- DoctorID (PK): Unique identifier
+•	- Name: Full name
+•	- Specialization: Medical specialty
+•	- DepartmentID (FK): Department the doctor belongs to
+•	- ContactNumber: Phone number
+•	- Email: Optional email address
+•	- YearsOfExperience: Experience in years
+Department
+•	- DepartmentID (PK): Unique identifier
+•	- DepartmentName: Name of the department
+•	- Location: Physical location in the hospital
+Appointment
+•	- AppointmentID (PK): Unique appointment ID
+•	- PatientID (FK): Linked patient
+•	- DoctorID (FK): Linked doctor
+•	- AppointmentDate: Date of the appointment
+•	- AppointmentTime: Time of the appointment
+•	- Status: Scheduled, Completed, Cancelled
+•	- Reason: Reason for visit
+•	- Notes: Additional notes
+Prescription
+•	- PrescriptionID (PK): Unique ID
+•	- PatientID (FK): Linked patient
+•	- DoctorID (FK): Prescribing doctor
+•	- MedicationName: Name of the medicine
+•	- Dosage: Amount and frequency
+•	- StartDate: Start date
+•	- EndDate: End date
+•	- Frequency: How often to take the medication
+•	- Instructions: Additional instructions
+Treatment
+•	- TreatmentID (PK): Unique ID
+•	- PatientID (FK): Linked patient
+•	- DoctorID (FK): Doctor performing treatment
+•	- ProcedureName: Name of the treatment/procedure
+•	- ProcedureDate: Date of treatment
+•	- Notes: Additional notes
+•	- Cost: Treatment cost
+Room
+•	- RoomID (PK): Unique ID
+•	- RoomNumber: Room number
+•	- RoomType: ICU, General, etc.
+•	- PatientID (FK): Assigned patient
+•	- Floor: Floor number
+•	- AvailabilityStatus: Occupied/Available
+Billing
+•	- BillID (PK): Unique bill ID
+•	- PatientID (FK): Linked patient
+•	- Amount: Total amount billed
+•	- BillingDate: Date of billing
+•	- Status: Paid/Unpaid
+•	- PaymentMethod: Cash, Card, Insurance
+•	- PaidAmount: Amount already paid
+•	- DueAmount: Remaining amount
+Insurance
+•	- InsuranceID (PK): Unique ID
+•	- PatientID (FK): Covered patient
+•	- ProviderName: Insurance provider
+•	- PolicyNumber: Policy number
+•	- CoverageAmount: Maximum coverage
+•	- ExpiryDate: Policy expiry date
+LabTest
+•	- LabTestID (PK): Unique ID
+•	- PatientID (FK): Linked patient
+•	- DoctorID (FK): Ordering doctor
+•	- TestName: Name of the test
+•	- TestDate: Date of the test
+•	- Result: Result of the test
+•	- Status: Pending/Completed
+Relationships
+From	To	Type	Description
+Patient	Appointment	1:M	One patient can have many appointments.
+Doctor	Appointment	1:M	One doctor can handle many appointments.
+Department	Doctor	1:M	One department includes many doctors.
+Patient	Prescription	1:M	One patient can receive multiple prescriptions.
+Doctor	Prescription	1:M	One doctor can write many prescriptions.
+Patient	Treatment	1:M	One patient can undergo multiple treatments.
+Doctor	Treatment	1:M	One doctor can perform multiple treatments.
+Patient	Room	1:1	One patient is assigned one room at a time.
+Doctor	Room	1:M	One doctor can use multiple rooms.
+Room	Treatment	1:M	One room can host multiple treatments.
+Patient	Billing	1:M	One patient can have multiple bills.
+Prescription	Billing	1:M	Prescription charges are billed.
+Treatment	Billing	1:M	Treatments generate bills.
+LabTest	Billing	1:M	Lab tests generate bills.
+Insurance	Billing	1:M	Insurance can cover multiple bills.
+Patient	Insurance	1:M	One patient can have multiple insurance policies.
+Patient	LabTest	1:M	One patient can undergo multiple lab tests.
+Doctor	LabTest	1:M	One doctor can order multiple lab tests.
+Appointment	LabTest	1:M	Lab tests can be ordered during appointments.
+Conclusion
+The above ERD/UML diagram models a comprehensive hospital management system, including:
+- Patient care
+- Doctor workflows
+- Treatments and prescriptions
+- Lab tests
+- Billing
+- Rooms and insurance
+
+This structure ensures efficient data management and supports real-world hospital operations.
